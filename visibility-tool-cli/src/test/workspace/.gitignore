@@ -1,0 +1,8 @@
+#
+# === DO NOT EDIT ===
+# Generated from /core/tools/build/graph/bazel_visibility_tool/visibility-tool-cli/src/test/workspace/.p4ignore
+#
+/bazel-*
+.eclipse
+eclipse-bin/
+eclipse-testbin/

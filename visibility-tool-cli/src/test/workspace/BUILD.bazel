@@ -1,0 +1,10 @@
+java_binary(
+    name = "deps-tool",
+    main_class = "com.salesforce.tools.bazel.mavendependencies.tool.cli.DependenciesToolCli",
+    visibility = ["//visibility:public"],
+    runtime_deps = [
+        "@bazel_maven_deps//maven-deps-cli-framework:slf4j_logger",
+        "@bazel_maven_deps//maven-deps-tool",
+        "@bazel_visibility_tool//visibility-tool-cli",  # visibility provider extensions
+    ],
+)

@@ -1,0 +1,11 @@
+directories:
+  .
+
+derive_targets_from_directories: true
+target_provisioning_strategy: project-per-package
+
+project_settings:
+  .settings/org.eclipse.core.resources.prefs
+  .settings/org.eclipse.core.runtime.prefs
+  .settings/org.eclipse.jdt.core.prefs
+  .settings/org.eclipse.jdt.ui.prefs

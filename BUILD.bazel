@@ -1,0 +1,11 @@
+package(default_visibility = ["//visibility:private"])
+
+java_binary(
+    name = "cli",
+    main_class = "com.salesforce.tools.visibility.cli.VisibilityToolCli",
+    visibility = ["//visibility:public"],
+    runtime_deps = [
+        "//visibility-tool-cli",
+        "@bazel_maven_deps//maven-deps-cli-framework:slf4j_logger",
+    ],
+)

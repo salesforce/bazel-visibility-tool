@@ -1,0 +1,11 @@
+# use the JDK available in CI for everything
+build --java_runtime_version=local_jdk
+build --tool_java_runtime_version=local_jdk
+
+common --color=no
+common --curses=no
+common --show_timestamps
+
+build --loading_phase_threads=1
+build --verbose_failures
+build --symlink_prefix=bazel-ci-

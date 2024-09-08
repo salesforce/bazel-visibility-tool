@@ -1,0 +1,98 @@
+load("@contrib_rules_jvm//java:defs.bzl", "java_test_suite")
+
+package(default_visibility = ["//visibility:private"])
+
+java_library(
+    name = "visibility-tool-cli",
+    srcs = glob([
+        "src/main/java/**/*.java",
+    ]),
+    data = [
+        "//bazel",
+    ],
+    resources = glob(
+        ["src/main/resources/**"],
+    ),
+    visibility = ["//visibility:public"],
+    exports = [
+        "@bazel_maven_deps//starlark",
+    ],
+    deps = [
+        ":bazel-vendored-src",
+        "//third_party/protos/bazel:build_java_library",
+        "@bazel_maven_deps//maven-deps-cli-framework",
+        "@bazel_maven_deps//maven-deps-tool",
+        "@bazel_maven_deps//starlark",
+        "@com_google_code_gson_gson",
+        "@com_google_guava_guava",
+        "@info_picocli_picocli",
+        "@org_slf4j_slf4j_api",
+    ],
+)
+
+java_library(
+    name = "bazel-vendored-src",
+    srcs = glob([
+        "src/bazel/java/**/*.java",
+    ]),
+    plugins = [
+        ":auto_annotation_plugin",
+    ],
+    runtime_deps = [
+        "@com_google_flogger_flogger_slf4j_backend",
+    ],
+    deps = [
+        "@bazel_maven_deps//starlark",
+        "@com_google_auto_value_auto_value_annotations",
+        "@com_google_code_findbugs_jsr305",
+        "@com_google_errorprone_error_prone_annotations",
+        "@com_google_flogger_flogger",
+        "@com_google_guava_guava",
+        "@info_picocli_picocli",
+        "@org_slf4j_slf4j_api",
+    ],
+)
+
+java_plugin(
+    name = "auto_annotation_plugin",
+    processor_class = "com.google.auto.value.processor.AutoValueProcessor",
+    deps = [
+        "@com_google_auto_value_auto_value",
+    ],
+)
+
+java_test_suite(
+    name = "testsuite",
+    size = "small",
+    srcs = glob([
+        "src/test/java/**/*.java",
+    ]),
+    data = [ # https://github.com/bazel-contrib/rules_jvm/issues/253
+        "src/test/workspace/BUILD.bazel",
+        "src/test/workspace/WORKSPACE",
+        "src/test/workspace/tools/build/visibility/BUILD.bazel",
+        "src/test/workspace/tools/build/visibility/allowlists/lib-javax-exceptions/BUILD.bazel",
+    ],
+    resources = glob(["src/test/resources/**"]),
+    runner = "junit5",
+    runtime_deps = [
+        "@org_junit_jupiter_junit_jupiter_engine",
+        "@org_junit_platform_junit_platform_launcher",
+        "@org_junit_platform_junit_platform_reporting",
+        "@org_slf4j_slf4j_simple",
+    ],
+    deps = [
+        ":bazel-vendored-src",
+        ":visibility-tool-cli",
+        "@bazel_maven_deps//maven-deps-cli-framework",
+        "@bazel_maven_deps//maven-deps-tool",
+        "@bazel_maven_deps//starlark",
+        "@com_google_guava_guava",
+        "@info_picocli_picocli",
+        "@org_hamcrest_hamcrest",
+        "@org_junit_jupiter_junit_jupiter_api",
+        "@org_mockito_mockito_core",
+        "@org_mockito_mockito_junit_jupiter",
+        "@org_slf4j_slf4j_api",
+    ],
+)

@@ -1,0 +1,6 @@
+{
+    "documentation for humans": {
+        "What": "This file provides buildifier configuration.",
+        "See": "https://github.com/bazelbuild/buildtools/blob/master/buildifier/config/config.go"
+    }
+}

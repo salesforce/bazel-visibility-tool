@@ -1,0 +1,4 @@
+/bazel-*
+.eclipse
+eclipse-bin/
+eclipse-testbin/

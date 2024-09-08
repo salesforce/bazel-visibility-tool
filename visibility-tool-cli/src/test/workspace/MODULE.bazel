@@ -1,0 +1,23 @@
+"""Module descriptor for integration test workspace
+"""
+
+module(
+    name = "integration_test",
+    version = "1.0",
+)
+
+bazel_dep(name = "contrib_rules_jvm", version = "0.24.0")
+bazel_dep(name = "bazel_visibility_tool", version = "1.0")
+local_path_override(
+    module_name = "bazel_visibility_tool",
+    path = "../../../../",
+)
+
+bazel_dep(name = "bazel_maven_deps", version = "1.0")
+local_path_override(
+    module_name = "bazel_maven_deps",
+    path = "../../../../../bazel_maven_deps",
+)
+
+bazel_maven_deps_maven_dependencies = use_extension("@bazel_maven_deps//third_party/dependencies/pinned_catalog:extension.bzl", "maven_dependencies")
+use_repo(bazel_maven_deps_maven_dependencies, "aopalliance_aopalliance", "bazel_maven_deps__org_apache_maven_maven_artifact", "bazel_maven_deps__org_apache_maven_maven_builder_support", "bazel_maven_deps__org_apache_maven_maven_core", "bazel_maven_deps__org_apache_maven_maven_model", "bazel_maven_deps__org_apache_maven_maven_model_builder", "bazel_maven_deps__org_apache_maven_maven_plugin_api", "bazel_maven_deps__org_apache_maven_maven_repository_metadata", "bazel_maven_deps__org_apache_maven_maven_resolver_provider", "bazel_maven_deps__org_apache_maven_maven_settings", "bazel_maven_deps__org_apache_maven_maven_settings_builder", "bazel_maven_deps__org_apache_maven_plugin_tools_maven_plugin_annotations", "bazel_maven_deps__org_apache_maven_resolver_maven_resolver_api", "bazel_maven_deps__org_apache_maven_resolver_maven_resolver_connector_basic", "bazel_maven_deps__org_apache_maven_resolver_maven_resolver_impl", "bazel_maven_deps__org_apache_maven_resolver_maven_resolver_named_locks", "bazel_maven_deps__org_apache_maven_resolver_maven_resolver_spi", "bazel_maven_deps__org_apache_maven_resolver_maven_resolver_supplier", "bazel_maven_deps__org_apache_maven_resolver_maven_resolver_transport_classpath", "bazel_maven_deps__org_apache_maven_resolver_maven_resolver_transport_file", "bazel_maven_deps__org_apache_maven_resolver_maven_resolver_transport_http", "bazel_maven_deps__org_apache_maven_resolver_maven_resolver_util", "bazel_maven_deps__org_apache_maven_shared_maven_shared_utils", "bazel_maven_deps__org_codehaus_plexus_plexus_cipher", "bazel_maven_deps__org_codehaus_plexus_plexus_classworlds", "bazel_maven_deps__org_codehaus_plexus_plexus_component_annotations", "bazel_maven_deps__org_codehaus_plexus_plexus_interpolation", "bazel_maven_deps__org_codehaus_plexus_plexus_sec_dispatcher", "bazel_maven_deps__org_codehaus_plexus_plexus_utils", "com_github_ben_manes_caffeine_caffeine", "com_github_ben_manes_caffeine_guava", "com_google_auth_google_auth_library_credentials", "com_google_auto_value_auto_value", "com_google_auto_value_auto_value_annotations", "com_google_code_findbugs_jsr305", "com_google_code_gson_gson", "com_google_errorprone_error_prone_annotations", "com_google_flogger_flogger", "com_google_flogger_flogger_slf4j_backend", "com_google_flogger_flogger_system_backend", "com_google_flogger_google_extensions", "com_google_guava_failureaccess", "com_google_guava_guava", "com_google_guava_listenablefuture", "com_google_inject_guice", "com_google_j2objc_j2objc_annotations", "commons_codec_commons_codec", "info_picocli_picocli", "javax_annotation_javax_annotation_api", "javax_inject_javax_inject", "junit_junit", "me_tongfei_progressbar", "net_bytebuddy_byte_buddy", "net_bytebuddy_byte_buddy_agent", "org_apache_commons_commons_lang3", "org_apache_commons_commons_text", "org_apache_httpcomponents_httpclient", "org_apache_httpcomponents_httpcore", "org_apiguardian_apiguardian_api", "org_checkerframework_checker_compat_qual", "org_checkerframework_checker_qual", "org_eclipse_sisu_org_eclipse_sisu_inject", "org_eclipse_sisu_org_eclipse_sisu_plexus", "org_fusesource_jansi_jansi", "org_hamcrest_hamcrest", "org_hamcrest_hamcrest_core", "org_jline_jline", "org_junit_jupiter_junit_jupiter", "org_junit_jupiter_junit_jupiter_api", "org_junit_jupiter_junit_jupiter_engine", "org_junit_jupiter_junit_jupiter_params", "org_junit_platform_junit_platform_commons", "org_junit_platform_junit_platform_engine", "org_junit_platform_junit_platform_launcher", "org_junit_platform_junit_platform_reporting", "org_junit_platform_junit_platform_runner", "org_junit_platform_junit_platform_suite", "org_junit_platform_junit_platform_suite_api", "org_junit_platform_junit_platform_suite_commons", "org_junit_platform_junit_platform_suite_engine", "org_mockito_mockito_core", "org_mockito_mockito_junit_jupiter", "org_objenesis_objenesis", "org_opentest4j_opentest4j", "org_slf4j_jcl_over_slf4j", "org_slf4j_slf4j_api", "org_slf4j_slf4j_simple")

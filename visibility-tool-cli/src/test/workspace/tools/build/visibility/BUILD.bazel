@@ -1,0 +1,86 @@
+load("@bazel_visibility_tool//bazel:defs.bzl", "visibility_group")
+
+#
+# Convenience definition used in the layers below
+#
+_test_packages = [
+    "//**/*tests",
+]
+
+visibility_group(
+    name = "lib-forbidden-noexceptions",
+    include_patterns = [
+        "@*lombok*",
+    ],
+)
+
+visibility_group(
+    name = "lib-javax-jakarata-migration",
+    include_patterns = [
+        "@javax_*",
+    ],
+    visibility_allow_list = "//tools/build/visibility/allowlists/lib-javax-exceptions",
+)
+
+visibility_group(
+    name = "app-frontend-api",
+    exclude_patterns = _test_packages,
+    include_patterns = [
+        "//frontend/apis/**",
+    ],
+    visible_to_self = True,  # to any other api module in the frontend
+)
+
+visibility_group(
+    name = "app-frontend-internal",
+    exclude_patterns = _test_packages,
+    include_patterns = [
+        "//frontend/internal/**",
+    ],
+)
+
+visibility_group(
+    name = "app-frontend-tests",
+    include_patterns = [
+        "//frontend/**/*tests",
+    ],
+)
+
+visibility_group(
+    name = "app-backend-api",
+    exclude_patterns = _test_packages,
+    include_patterns = [
+        "//backend/apis/**",
+    ],
+    visible_to_self = True,  # to any other api module in the backend
+)
+
+visibility_group(
+    name = "app-backend-internal",
+    exclude_patterns = _test_packages,
+    include_patterns = [
+        "//backend/internal/**",
+    ],
+)
+
+visibility_group(
+    name = "app-backend-tests",
+    include_patterns = [
+        "//backend/**/*tests",
+    ],
+)
+
+visibility_group(
+    name = "test-utilities",
+    include_patterns = [
+        "//testutilities/**",
+        "@junit_*",
+        "@maven://:*junit*",
+    ],
+    visible_to = [
+        # visible to any test group
+        ":app-frontend-tests",
+        ":app-backend-tests",
+    ],
+    visible_to_self = True,  # within test-utilities group
+)

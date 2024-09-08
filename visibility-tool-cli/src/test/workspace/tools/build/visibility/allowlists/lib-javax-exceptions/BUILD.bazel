@@ -1,0 +1,5 @@
+package(default_visibility = ["//tools/build/visibility:__subpackages__"])
+
+package_group(
+    name = "lib-javax-exceptions",
+)
